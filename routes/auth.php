@@ -18,6 +18,14 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+});
+
+
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
@@ -40,9 +48,6 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
-});
-Route::middleware(['auth'])->group(function () {
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
 });
 
 Route::middleware('auth')->group(function () {
