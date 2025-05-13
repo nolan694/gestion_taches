@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StatController;
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
@@ -24,6 +26,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+});
+
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update'); // Route pour mettre à jour le profil
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); // Route pour supprimer le compte
 });
 
 Route::post('/tasks/{task}/complete', [TaskController::class, 'complete'])->name('tasks.complete');

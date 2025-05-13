@@ -25,6 +25,13 @@
                     <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
                         {{ __('Tâches') }}
                     </x-nav-link>
+                    @auth
+                        @if (auth()->user()->role === 'admin')
+                            <x-nav-link :href="route('stats.index')" :active="request()->routeIs('stats.index')">
+                                {{ __('Statistiques') }}
+                            </x-nav-link>
+                        @endif
+                    @endauth
                 </div>
             </div>
 
