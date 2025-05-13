@@ -146,4 +146,14 @@ class TaskController extends Controller
 
         return redirect()->route('tasks.index')->with('success', 'Tâche supprimée avec succès.');
     }
+
+    public function show(Task $task)
+    {
+        // Vérification des permissions : seul l'admin ou le propriétaire peut voir la tâche
+        if (auth()->user()->role !== 'admin' && $task->user_id !== auth()->id()) {
+            return redirect()->route('tasks.index')->with('error', 'Accès refusé.');
+        }
+
+        return view('tasks.show', compact('task'));
+    }
 }

@@ -29,7 +29,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update'); // Route pour mettre à jour le profil
@@ -45,6 +44,7 @@ Route::resource('tasks', TaskController::class);
 Route::middleware('auth')->group(function () {
     // Liste des tâches avec filtrage et pagination
     Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+    Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
 
     // Créer une tâche
     Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
