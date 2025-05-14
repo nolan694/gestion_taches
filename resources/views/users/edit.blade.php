@@ -39,7 +39,7 @@
                 <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Rôle</label>
                 <select name="role" id="role"
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                    <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>Utilisateur</option>
+                    <option value="utilisateur" {{ $user->role === 'utilisateur' ? 'selected' : '' }}>Utilisateur</option>
                     <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Administrateur</option>
                 </select>
             </div>
