@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('due_date');
             $table->string('status');
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Référence à 'users'
+            $table->foreignId('priority_id')->constrained('priority')->onDelete('cascade'); // Référence à 'prioritees'
             $table->timestamps();
         });
 
